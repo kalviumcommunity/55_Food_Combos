@@ -1,4 +1,17 @@
 {
+<<<<<<< HEAD
+=======
+  "name": "Worst Food Combos",
+  "version": "1.0.0",
+  "description": "List of the worst food combinations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+>>>>>>> 83f65fd86be858d851b6159f172ba9ae7a87facb
   "dependencies": {
     "express": "^4.18.2"
   }

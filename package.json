@@ -1,6 +1,5 @@
 {
-
-  "name": "Worst Food Combos",
+  "name": "worst_food_combos",
   "version": "1.0.0",
   "description": "List of the worst food combinations",
   "main": "index.js",

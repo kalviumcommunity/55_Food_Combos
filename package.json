@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2f483d38e6146fdfebeb58f7a867e2fe24116770
+
   "name": "Worst Food Combos",
   "version": "1.0.0",
   "description": "List of the worst food combinations",
@@ -14,10 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
->>>>>>> 83f65fd86be858d851b6159f172ba9ae7a87facb
-=======
->>>>>>> 2f483d38e6146fdfebeb58f7a867e2fe24116770
   "dependencies": {
     "express": "^4.18.2"
   }

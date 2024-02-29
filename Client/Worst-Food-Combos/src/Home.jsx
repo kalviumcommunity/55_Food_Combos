@@ -18,11 +18,17 @@ import './Home.css'
         </div>
     </div>
 
-    <div className="des">
-        <p className='intro'>Welcome to Our Quirky Corner of Food Exploration!
-
-Have you ever wondered about the oddest food combinations out there? Well, you've stumbled upon the right place! At Worst Food Combos, we're all about embracing the weird, the wild, and the downright wacky when it comes to food pairings. Join us on a culinary adventure like no other!</p>
+    <div className="container">
+      <div className="image">
+        <img src='https://images.pexels.com/photos/5732764/pexels-photo-5732764.jpeg?auto=compress&cs=tinysrgb&w=600' height="300px" width="250px"></img>
+      </div>
+      <div className="info">
+        <h3>Red Wine and Seafood</h3>
+        <h3>Non-Veg</h3>
+        <h3>4/10</h3>
+      </div>
     </div>
+    
     </>
   )
 }

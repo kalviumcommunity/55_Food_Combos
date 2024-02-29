@@ -45,3 +45,15 @@ body{
     width:300px;
     margin-right:30px;
 }
+
+.info{
+    display: block;
+    align-items: center;
+}
+
+.container{
+    margin: 30px;
+    height:400px;
+    width:250px;
+    background: #fff;
+}

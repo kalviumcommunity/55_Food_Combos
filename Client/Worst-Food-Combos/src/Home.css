@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Madimi One';
 }
 .nav{
     display: flex;
@@ -51,9 +54,50 @@ body{
     align-items: center;
 }
 
+.card:hover{
+    transition: 1s;
+    transform:scale(1.03);
+    cursor: pointer;
+}
+
+.card:hover{
+    background:#FCDC2A;
+}
+
 .container{
     margin: 30px;
-    height:400px;
-    width:250px;
-    background: #fff;
-}
+    height:450px;
+    width:420px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 30px;
+    width: 90vw;
+  }
+
+  .f{
+    font-size:30px;
+  }
+
+  .in{
+    font-size:20px;
+  }
+
+  
+  .card {
+    background-color: white; /* Set card background to white */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .info {
+    padding: 10px;
+  }
+  
+  /* Add any additional styling you need for the cards */
+  

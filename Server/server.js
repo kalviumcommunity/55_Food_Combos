@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
 const routes = require('./routes')
+const schema = require('./schema')
 const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 const connection = process.env.URI;
 
 let connectionStatus = 'disconnected';
+var cors = require('cors')
+
+app.use(cors())
 
 const startDatabase = async () => {
     try {

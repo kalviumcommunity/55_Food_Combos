@@ -1,7 +1,25 @@
 import React from 'react'
 import './Home.css'
+import { useState } from 'react';
 
  function Home() {
+
+  const [data,setData] = useState([])
+  useEffect(() => {
+    axios.get("", {
+      headers: { Authorization: "whatever-you-want" }, // Authorization header
+    })
+    .then((response) => {
+      const data = response.data.books; // Extracting book data from response
+      setBooks(data); // Updating books state with fetched data
+    })
+    .catch(() => {
+      console.log("Status code: 404"); // Log error if API endpoint not found
+      console.log("Website not found");
+    });
+  }, []); // Empty dependency array ensures useEffect runs only once when component mounts
+
+
   return (
     <>
     <div className='nav'>

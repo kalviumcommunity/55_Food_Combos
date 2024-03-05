@@ -1,11 +1,19 @@
 const express = require('express')
 const router = express.Router()
+const schema = require('./schema')
+const { Model } = require('./schema')
 
 router.use(express.json())
 
-router.get('/get',(req,res)=>{
-    res.send('get request')
-})
+router.get('/read', async (req, res) => {
+    try {
+        const foodCombinations = await Model.find(); // Retrieving all food combinations from the database
+        res.json(foodCombinations); // Sending the retrieved data as a JSON response
+    } catch (err) {
+        console.error('Error in GET request:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 router.post('/post',(req,res)=>{
     console.log(req.body)
@@ -19,5 +27,6 @@ router.put('/put',(req,res)=>{
 router.delete('/delete',(req,res)=>{
     res.send("delete request")
 })
+
 
 module.exports = router

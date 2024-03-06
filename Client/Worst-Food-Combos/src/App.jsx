@@ -1,12 +1,22 @@
 import Home from "./Home"
 import './App.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Form from "./Form"
 
 function App() {
   
 
   return (
     <>
-      <Home/>
+    <BrowserRouter>
+    
+    <Routes>
+    <Route path="/" element={<Home/>}/>
+      <Route path="/form" element={<Form/>}/>
+    </Routes>
+    
+    </BrowserRouter>
+      {/* <Home/> */}
     </>
   )
 }

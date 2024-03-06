@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [use, setUse] = useState([]);
@@ -31,6 +32,12 @@ function Home() {
             placeholder='Search your Worst Food Combinations' 
           />
           <button className='s-btn'>Search</button>
+        </div>
+        <div className='form'>
+          <Link to="/form">
+          <button className='f-btn'>Add Entity</button>
+          
+          </Link>
         </div>
       </div>
 

@@ -28,5 +28,15 @@ router.delete('/delete',(req,res)=>{
     res.send("delete request")
 })
 
+router.post('/new', async (req, res) => {
+    try {
+        const newData = Model.create(req.body);
+        res.send(newData);
+    } catch (error) {
+        console.error(error);
+        res.send('Error');
+    }
+});
+
 
 module.exports = router

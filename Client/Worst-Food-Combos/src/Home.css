@@ -68,6 +68,12 @@ body{
     cursor: pointer;
 }
 
+.update,.delete{
+    height:30px;
+    width: 45px;
+    margin-right:10px;
+}
+
 .card:hover{
     background:#FCDC2A;
 }

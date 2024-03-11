@@ -25,7 +25,7 @@ function Home() {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`https://server-folder-ftte.onrender.com/read/delete/${id}`);
+      await axios.delete(`https://server-folder-ftte.onrender.com/delete/${id}`);
       
       // Update the state after deletion
       setUse(prevState => prevState.filter(item => item._id !== id));
@@ -72,7 +72,9 @@ function Home() {
                 <p className='in'>Rating: {food.Rating}</p>
                 <div className="btns">
                   {/* Pass food._id as id to deleteItem */}
-                  <button className='update'>Update</button>
+                  <Link to="/update">
+                    <button className='update'>Update</button>
+                  </Link>
                   <button className='delete' onClick={() => deleteItem(food._id)}>Delete</button>
                 </div>
               </div>

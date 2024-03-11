@@ -39,6 +39,13 @@ router.post('/new', async (req, res) => {
     }
 });
 
+app.get('/read/:id', async (req,res) => {
+    const _id = req.params.id
+    userModel.findById({_id})
+    .then(users => res.json(users))
+    .catch(err => console.log(err))
+})
+
 router.put('/update/:id', async (req, res) => {
     try {
         const updatedData = await Model.findByIdAndUpdate(req.params.id, req.body, { new: true });

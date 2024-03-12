@@ -1,53 +1,63 @@
-const express = require('express')
-const router = express.Router()
-const schema = require('./schema')
-const { Model } = require('./schema')
+const express = require('express');
+const router = express.Router();
+const schema = require('./schema');
+const { Model } = require('./schema');
+const Joi = require('joi');
 
-router.use(express.json())
+router.use(express.json());
 
+// Define Joi schema for POST /new route
+const addValidationSchema = Joi.object({
+    flavour: Joi.string().required(),
+    taste: Joi.string().required(),
+    color: Joi.string().required(),
+    rating: Joi.number().required(),
+    image: Joi.string().required(),
+});
+
+// Define Joi schema for PUT /update/:id route
+const updateValidationSchema = Joi.object({
+    flavour: Joi.string(),
+    taste: Joi.string(),
+    color: Joi.string(),
+    rating: Joi.number(),
+    image: Joi.string(),
+});
+
+// GET request to read all food combinations
 router.get('/read', async (req, res) => {
     try {
-        const foodCombinations = await Model.find(); // Retrieving all food combinations from the database
-        res.json(foodCombinations); // Sending the retrieved data as a JSON response
+        const foodCombinations = await Model.find();
+        res.json(foodCombinations);
     } catch (err) {
         console.error('Error in GET request:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-router.post('/post',(req,res)=>{
-    console.log(req.body)
-    res.json(req.body)
-})
-
-router.put('/put',(req,res)=>{
-    res.send("put request")
-})
-
-router.delete('/delete',(req,res)=>{
-    res.send("delete request")
-})
-
+// POST request to add a new food combination
 router.post('/new', async (req, res) => {
     try {
+        const { error, value } = addValidationSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
         const newData = await Model.create(req.body);
-        console.log(newData)
         res.send(newData);
     } catch (error) {
         console.error(error);
-        res.send('Error');
+        res.status(500).send('Internal Server Error');
     }
 });
 
-router.get('/read/:id', async (req,res) => {
-    const _id = req.params.id
-    userModel.findById({_id})
-    .then(users => res.json(users))
-    .catch(err => console.log(err))
-})
-
+// PUT request to update food combination by ID
 router.put('/update/:id', async (req, res) => {
     try {
+        const { error, value } = updateValidationSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
+
         const updatedData = await Model.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedData) {
             return res.status(404).json({ error: 'Data not found' });
@@ -60,6 +70,7 @@ router.put('/update/:id', async (req, res) => {
     }
 });
 
+// DELETE request to delete food combination by ID
 router.delete('/delete/:id', async (req, res) => {
     try {
         const deletedData = await Model.findByIdAndDelete(req.params.id); 
@@ -74,4 +85,4 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-module.exports = router
+module.exports = router;

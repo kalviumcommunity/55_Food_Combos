@@ -72,7 +72,7 @@ function Home() {
                 <p className='in'>Rating: {food.Rating}</p>
                 <div className="btns">
                   {/* Pass food._id as id to deleteItem */}
-                  <Link to="/update">
+                  <Link to={`/update/${food._id}`}>
                     <button className='update'>Update</button>
                   </Link>
                   <button className='delete' onClick={() => deleteItem(food._id)}>Delete</button>

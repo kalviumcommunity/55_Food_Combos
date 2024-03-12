@@ -1,9 +1,26 @@
-const express = require('express')
-const router = express.Router()
-const schema = require('./schema')
-const { Model } = require('./schema')
+const express = require('express');
+const router = express.Router();
+const schema = require('./schema');
+const { Model } = require('./schema');
+const Joi = require('joi');
 
-router.use(express.json())
+router.use(express.json());
+
+const newDataSchema = Joi.object({
+    FoodCombination: Joi.string().required(),
+    Rating: Joi.number().required(),
+    Dairyfree: Joi.boolean().required(),
+    VegOrNonVEG: Joi.string().required(),
+    Img: Joi.string().required()
+});
+
+const updateDataSchema = Joi.object({
+    FoodCombination: Joi.string(),
+    Rating: Joi.number(),
+    Dairyfree: Joi.boolean(),
+    VegOrNonVEG: Joi.string(),
+    Img: Joi.string()
+});
 
 router.get('/read', async (req, res) => {
     try {
@@ -30,8 +47,12 @@ router.delete('/delete',(req,res)=>{
 
 router.post('/new', async (req, res) => {
     try {
+        const { error } = newDataSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
         const newData = await Model.create(req.body);
-        console.log(newData)
+        console.log(newData);
         res.send(newData);
     } catch (error) {
         console.error(error);
@@ -40,14 +61,18 @@ router.post('/new', async (req, res) => {
 });
 
 router.get('/read/:id', async (req,res) => {
-    const _id = req.params.id
-    userModel.findById({_id})
-    .then(users => res.json(users))
-    .catch(err => console.log(err))
-})
+    const _id = req.params.id;
+    Model.findById({_id})
+        .then(users => res.json(users))
+        .catch(err => console.log(err));
+});
 
 router.put('/update/:id', async (req, res) => {
     try {
+        const { error } = updateDataSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
         const updatedData = await Model.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedData) {
             return res.status(404).json({ error: 'Data not found' });
@@ -74,4 +99,4 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-module.exports = router
+module.exports = router;

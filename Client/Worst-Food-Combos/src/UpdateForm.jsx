@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './Form.css'; // Assuming the CSS path is correct
+import './Form.css';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 function UpdateForm() {
     const navigate = useNavigate();
-    const { id } = useParams(); // To fetch the specific entity's ID
+    const { id } = useParams();
 
     const [formData, setFormData] = useState({
         FoodCombination: '',
@@ -15,9 +15,8 @@ function UpdateForm() {
         Img: ''
     });
 
-    // Fetch the existing data for editing
     useEffect(() => {
-        if(id) { // Ensure there is an id to fetch data for
+        if (id) {
             axios.get(`https://server-folder-ftte.onrender.com/read/${id}`)
                 .then((response) => {
                     setFormData({
@@ -32,7 +31,7 @@ function UpdateForm() {
                     console.error(error);
                 });
         }
-    }, [id]); // Dependency array ensures useEffect runs when id changes
+    }, [id]);
 
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
@@ -46,7 +45,7 @@ function UpdateForm() {
         event.preventDefault();
         axios.put(`https://server-folder-ftte.onrender.com/update/${id}`, formData)
             .then(() => {
-                navigate('/'); // Adjust the navigate path as per your application's routing
+                navigate('/'); // Redirect to the homepage after successful update
             })
             .catch((error) => {
                 console.error(error);
@@ -57,7 +56,7 @@ function UpdateForm() {
         <div className='cont'>
             <div className='content'>
                 <form onSubmit={handleSubmit}>
-                    <label id='fclable'>
+                    <label>
                         Food Combinations:
                         <br />
                         <input
@@ -116,9 +115,10 @@ function UpdateForm() {
                         Update 
                     </button>
                 </form>
+                <Link to="/"></Link>
             </div>
         </div>
     );
 }
 
-export default UpdateForm;
+export default UpdateForm;

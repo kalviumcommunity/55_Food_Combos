@@ -100,7 +100,7 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-app.post('/Signup',async(req,res)=>{
+router.post('/Signup',async(req,res)=>{
     try{
         const user = await userModel.create({
             username:req.body.username,
@@ -112,7 +112,7 @@ app.post('/Signup',async(req,res)=>{
     }
   
 })
-app.post('/Login', async (req, res) => {
+router.post('/Login', async (req, res) => {
     try {
         const { username, password } = req.body;
         const user = await userModel.findOne({ username, password });
@@ -130,7 +130,7 @@ app.post('/Login', async (req, res) => {
     }
 });
 
-app.post('/logout',(req,res)=>{
+router.post('/logout',(req,res)=>{
     res.clearCookie('username')
     res.clearCookie('password')
 

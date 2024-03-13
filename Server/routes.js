@@ -102,7 +102,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 router.post('/Signup',async(req,res)=>{
     try{
-        const user = await userModel.create({
+        const user = await userSchema.create({
             username:req.body.username,
             password:req.body.password
         })
@@ -115,7 +115,7 @@ router.post('/Signup',async(req,res)=>{
 router.post('/Login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await userModel.findOne({ username, password });
+        const user = await userSchema.findOne({ username, password });
         
         if (!user) {
             return res.status(401).json({ error: 'Invalid username / password' });

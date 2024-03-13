@@ -1,0 +1,13 @@
+.l-btn{
+    height:320px;
+    width:300px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:600px;
+    margin-top:200px;
+}
+
+
+

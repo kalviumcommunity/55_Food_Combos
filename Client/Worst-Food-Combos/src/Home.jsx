@@ -50,6 +50,12 @@ function Home() {
           <button className='s-btn'>Search</button>
         </div>
         <div className='form'>
+          <Link to="/Login">
+            <button className='login'>Login</button>
+          </Link>
+          <Link to="/Sign-up">
+            <button className='signup'>Signup</button>
+          </Link>
           <Link to="/form">
             <button className='f-btn'>Add Entity</button>
           </Link>

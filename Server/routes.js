@@ -3,6 +3,7 @@ const router = express.Router();
 const schema = require('./schema');
 const { Model } = require('./schema');
 const Joi = require('joi');
+const userSchema = require('./UserSchema')
 
 router.use(express.json());
 

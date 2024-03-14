@@ -4,6 +4,8 @@ const schema = require('./schema');
 const { Model } = require('./schema');
 const Joi = require('joi');
 const {userModel} = require('./UserSchema')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 router.use(express.json());
 
@@ -137,4 +139,19 @@ router.post('/logout',(req,res)=>{
     res.status(200).json({message:'Logout succesful'})
 })
 
+
+router.post('/auth', async(req,res) => {
+    try{const {username,password} = req.body
+    const user = {
+        "username" : username,
+        "password" : password
+    }
+    const ACCESS_TOKEN = jwt.sign(user,process.env.ACCESS_TOKEN)
+    res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*1000})
+    res.json({"acsessToken" : ACCESS_TOKEN})
+}catch(err){
+    console.error(err)
+    res.status(500).json({error:'Internal Server Error'})
+}
+});
 module.exports = router;

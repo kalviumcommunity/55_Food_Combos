@@ -3,11 +3,12 @@ import './Home.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_URI = `https://server-folder-ftte.onrender.com/read`;
+const API_URI = 'https://server-folder-ftte.onrender.com/read';
 
 function Home() {
   const [use, setUse] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,11 +24,15 @@ function Home() {
     fetchData();
   }, []); 
 
+  useEffect(() => {
+    // Check login status
+    const loginStatus = sessionStorage.getItem('login');
+    setIsLoggedIn(!!loginStatus);
+  }, []);
+
   const deleteItem = async (id) => {
     try {
       await axios.delete(`https://server-folder-ftte.onrender.com/delete/${id}`);
-      
-      // Update the state after deletion
       setUse(prevState => prevState.filter(item => item._id !== id));
     } catch (error) {
       console.error("Error deleting data:", error);
@@ -50,15 +55,26 @@ function Home() {
           <button className='s-btn'>Search</button>
         </div>
         <div className='form'>
-          <Link to="/Login">
-            <button className='login'>Login</button>
-          </Link>
-          <Link to="/Sign-up">
-            <button className='signup'>Signup</button>
-          </Link>
-          <Link to="/form">
-            <button className='f-btn'>Add Entity</button>
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link to="/form">
+                <button className='f-btn'>Add Entity</button>
+              </Link>
+              <button className='login' onClick={() => {
+                sessionStorage.removeItem('login');
+                setIsLoggedIn(false);
+              }}>Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/Login">
+                <button className='login'>Login</button>
+              </Link>
+              <Link to="/Sign-up">
+                <button className='signup'>Signup</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
@@ -77,7 +93,6 @@ function Home() {
                 <p className='in'>Dairy Free: {food.Dairyfree ? "TRUE" : "FALSE"}</p>
                 <p className='in'>Rating: {food.Rating}</p>
                 <div className="btns">
-                  {/* Pass food._id as id to deleteItem */}
                   <Link to={`/update/${food._id}`}>
                     <button className='update'>Update</button>
                   </Link>

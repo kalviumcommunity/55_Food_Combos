@@ -10,6 +10,7 @@ function Home() {
   const [error, setError] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -12,7 +12,8 @@ function Form() {
     Rating: '',
     Dairyfree: false,
     VegOrNonVEG: '',
-    Img: ''
+    Img: '',
+    created_by: `${sessionStorage.getItem('username')}`
   });
 
   const handleSubmit = async (event) => {

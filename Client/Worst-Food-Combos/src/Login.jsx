@@ -42,6 +42,7 @@ function Login() {
         setCookie('username', username, 365);
         setCookie('password', password, 365);
         sessionStorage.setItem('loginSuccess', 'Login successful');
+        sessionStorage.setItem('username',username)
         sessionStorage.setItem('login', true);
         navigate("/");
       } else {

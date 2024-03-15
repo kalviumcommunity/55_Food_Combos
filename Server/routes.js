@@ -14,7 +14,8 @@ const newDataSchema = Joi.object({
     Rating: Joi.number().required(),
     Dairyfree: Joi.boolean().required(),
     VegOrNonVEG: Joi.string().required(),
-    Img: Joi.string().required()
+    Img: Joi.string().required(),
+    created_by: Joi.string()
 });
 
 const updateDataSchema = Joi.object({
@@ -22,7 +23,8 @@ const updateDataSchema = Joi.object({
     Rating: Joi.number(),
     Dairyfree: Joi.boolean(),
     VegOrNonVEG: Joi.string(),
-    Img: Joi.string()
+    Img: Joi.string(),
+    created_by: Joi.string()
 });
 
 router.get('/read', async (req, res) => {
@@ -141,14 +143,16 @@ router.post('/logout',(req,res)=>{
 
 
 router.post('/auth', async(req,res) => {
-    try{const {username,password} = req.body
+    try{
+        const {username,password} = req.body
     const user = {
         "username" : username,
         "password" : password
     }
     const ACCESS_TOKEN = jwt.sign(user,process.env.ACCESS_TOKEN)
-    res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*1000})
-    res.json({"acsessToken" : ACCESS_TOKEN})
+    res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*100})
+    // res.json({"accessToken" : ACCESS_TOKEN})
+    res.json({ "accessToken": ACCESS_TOKEN });
 }catch(err){
     console.error(err)
     res.status(500).json({error:'Internal Server Error'})

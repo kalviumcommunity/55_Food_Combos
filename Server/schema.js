@@ -5,7 +5,8 @@ const testSchema = mongoose.Schema({
     Rating: Number,
     Dairyfree: Boolean,
     VegOrNonVEG: String,
-    Img: String
+    Img: String,
+    created_by: String,
 });
 const Model = mongoose.model("foodcombination-collections", testSchema);
 module.exports = {Model};

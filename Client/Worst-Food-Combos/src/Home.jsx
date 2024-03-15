@@ -8,14 +8,19 @@ const API_URI = 'https://server-folder-ftte.onrender.com/read';
 function Home() {
   const [use, setUse] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [selectedUser, setSelectedUser] = useState("All");
+  const [uniqueUsers, setUniqueUsers] = useState(["All"]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(API_URI);
         setUse(res.data);
+
+        
+        const users = ["All", ...new Set(res.data.map(item => item.created_by).filter(Boolean))];
+        setUniqueUsers(users);
       } catch (err) {
         console.log(err);
         setError("Error fetching data. Please try again.");
@@ -23,7 +28,7 @@ function Home() {
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
   useEffect(() => {
     // Check login status
@@ -40,6 +45,8 @@ function Home() {
       setError("Error deleting data. Please try again.");
     }
   };
+
+  const filteredEntries = use.filter(item => selectedUser === "All" || item.created_by === selectedUser);
 
   return (
     <>
@@ -82,7 +89,16 @@ function Home() {
       {error && <p className="error-message">{error}</p>}
 
       <div className="container">
-        {use.map(food => (
+        {isLoggedIn && (
+          <div className="filter">
+            <select value={selectedUser} onChange={e => setSelectedUser(e.target.value)}>
+              {uniqueUsers.map(user => (
+                <option key={user} value={user}>{user}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {filteredEntries.map(food => (
           <div className="food-item" key={food._id}>
             <div className="card">
               <div className="image">

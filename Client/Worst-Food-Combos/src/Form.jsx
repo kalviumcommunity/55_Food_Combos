@@ -20,7 +20,9 @@ function Form() {
     event.preventDefault();
     axios.post('https://server-folder-ftte.onrender.com/new', formData)
       .then(() => {
+        console.log(formData)
         navigate('/');
+
       })
       .catch((error) => {
         console.error(error);

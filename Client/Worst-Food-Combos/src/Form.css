@@ -1,0 +1,32 @@
+.cont{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 95vw;
+    height: 90vh;
+}
+
+.content{
+    height:460px;
+    width: 360px;
+    background: #fff;
+    padding:20px;
+    display: flex;
+    justify-content: center
+}
+
+.submit{
+    margin-left:20px;
+    width:80px;
+    height: 30px;
+}
+
+input{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: black;
+}
+
+#fclable{
+    margin-top: 10px;
+}
